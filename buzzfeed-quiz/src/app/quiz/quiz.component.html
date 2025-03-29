@@ -1,1 +1,18 @@
-<p>quiz works!</p>
+<div class="quiz-container">
+    <div *ngIf="!showResult">
+      <app-question
+        [question]="questions[currentQuestionIndex]"
+        (answerSelected)="onAnswerSelected($event)"
+      ></app-question>
+  
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="(currentQuestionIndex + 1) / questions.length * 100"></div>
+      </div>
+    </div>
+  
+    <div *ngIf="showResult" class="result-container">
+      <h1 class="result-title">{{ result.title }}</h1>
+      <p class="result-description">{{ result.description }}</p>
+      <button class="restart-button" (click)="restartQuiz()">Refazer Quiz</button>
+    </div>
+  </div>
