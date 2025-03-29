@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { QuizService } from '../quiz.service';
 import { Question, QuizResult } from '../models';
+import { QuestionComponent } from '../question/question.component';
 
 @Component({
   selector: 'app-quiz',
+  standalone: true,
+  imports: [CommonModule, QuestionComponent],
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit { 
-  questions: Question[] = []; 
+export class QuizComponent implements OnInit {
+  questions: Question[] = [];
   currentQuestionIndex = 0;
   showResult = false;
   result!: QuizResult;
 
   constructor(private quizService: QuizService) {}
 
-  ngOnInit(): void { 
-    this.questions = this.quizService.getQuestions(); 
+  ngOnInit(): void {
+    this.questions = this.quizService.getQuestions();
   }
 
   onAnswerSelected(score: number): void {
